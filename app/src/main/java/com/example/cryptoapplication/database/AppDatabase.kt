@@ -6,9 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.cryptoapplication.pojo.CoinPriceInfo
 
-@Database(entities = [CoinPriceInfoDao::class], version = 1, exportSchema = false)
+@Database(entities = [CoinPriceInfo::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     companion object {
+
         private var db: AppDatabase? = null
         private const val DB_NAME = "main.db"
         private val LOCK = Any()
@@ -28,5 +29,5 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 
-    abstract fun coinPriceInfoDao(): CoinPriceInfo
+    abstract fun coinPriceInfoDao(): CoinPriceInfoDao
 }
