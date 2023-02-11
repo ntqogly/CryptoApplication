@@ -17,8 +17,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         coinViewModel = ViewModelProvider(this)[CoinViewModel::class.java]
-        coinViewModel.loadData()
-        coinViewModel.priceList.observe(this) {
+//        coinViewModel.priceList.observe(this) {
+//            Log.d("TEST_OF_LOADING_DATA", "Success ACTIVITY $it")
+//        }
+        coinViewModel.getDetailInfo("ETH").observe(this) {
             Log.d("TEST_OF_LOADING_DATA", "Success ACTIVITY $it")
         }
     }
