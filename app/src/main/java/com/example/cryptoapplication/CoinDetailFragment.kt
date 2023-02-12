@@ -28,11 +28,11 @@ class CoinDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (!requireActivity().intent.hasExtra(EXTRA_FROM_SYMBOL)) {
+        if (!requireArguments().containsKey(EXTRA_FROM_SYMBOL)) {
             requireActivity().finish()
             return
         }
-        val fromSymbol = requireActivity().intent.getStringExtra(EXTRA_FROM_SYMBOL)
+        val fromSymbol = requireArguments().getString(EXTRA_FROM_SYMBOL)
         viewModel = ViewModelProvider(this)[ViewModel::class.java]
         if (fromSymbol != null) {
             viewModel.getDetailInfo(fromSymbol).observe(viewLifecycleOwner) {
@@ -49,12 +49,10 @@ class CoinDetailFragment : Fragment() {
             }
         }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
     companion object {
         private const val EXTRA_FROM_SYMBOL = "fSym"
 
