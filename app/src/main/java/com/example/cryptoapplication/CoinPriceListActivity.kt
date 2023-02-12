@@ -10,8 +10,7 @@ import com.example.cryptoapplication.pojo.CoinPriceInfo
 
 class CoinPriceListActivity : AppCompatActivity() {
 
-
-    private lateinit var coinViewModel: CoinViewModel
+    private lateinit var viewModel: ViewModel
     private lateinit var rvCoinPriceList: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,13 +20,17 @@ class CoinPriceListActivity : AppCompatActivity() {
         val coinInfoAdapter = CoinInfoAdapter(this)
         coinInfoAdapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
             override fun onCoinClick(coinPriceInfo: CoinPriceInfo) {
-                Log.d("TEST", coinPriceInfo.fromSymbol)
+                val intent = CoinDetailActivity.newIntent(
+                    this@CoinPriceListActivity,
+                    coinPriceInfo.fromSymbol
+                )
+                startActivity(intent)
             }
         }
 
         rvCoinPriceList.adapter = coinInfoAdapter
-        coinViewModel = ViewModelProvider(this)[CoinViewModel::class.java]
-        coinViewModel.priceList.observe(this) {
+        viewModel = ViewModelProvider(this)[ViewModel::class.java]
+        viewModel.priceList.observe(this) {
             coinInfoAdapter.coinInfoList = it
         }
     }
