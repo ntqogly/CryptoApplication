@@ -1,7 +1,8 @@
-package com.example.cryptoapplication
+package com.example.cryptoapplication.presentaton
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.cryptoapplication.R
 
 class MainActivity : AppCompatActivity() {
 

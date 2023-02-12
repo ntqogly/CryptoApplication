@@ -1,4 +1,4 @@
-package com.example.cryptoapplication
+package com.example.cryptoapplication.presentaton
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cryptoapplication.adapter.CoinInfoAdapter
+import com.example.cryptoapplication.R
+import com.example.cryptoapplication.presentaton.adapter.CoinInfoAdapter
 import com.example.cryptoapplication.databinding.FragmentCoinPriceListBinding
-import com.example.cryptoapplication.pojo.CoinPriceInfo
+import com.example.cryptoapplication.data.model.CoinPriceInfo
 
 class CoinPriceListFragment : Fragment() {
     private lateinit var viewModel: ViewModel
