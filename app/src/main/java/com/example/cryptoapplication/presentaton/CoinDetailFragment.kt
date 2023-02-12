@@ -1,4 +1,4 @@
-package com.example.cryptoapplication
+package com.example.cryptoapplication.presentaton
 
 import android.os.Bundle
 import android.view.LayoutInflater
