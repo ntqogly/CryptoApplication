@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoapplication.R
 import com.example.cryptoapplication.presentaton.adapter.CoinInfoAdapter
 import com.example.cryptoapplication.databinding.FragmentCoinPriceListBinding
-import com.example.cryptoapplication.data.model.CoinPriceInfo
+import com.example.cryptoapplication.data.network.model.CoinInfoDto
 
 class CoinPriceListFragment : Fragment() {
     private lateinit var viewModel: ViewModel
@@ -37,7 +37,7 @@ class CoinPriceListFragment : Fragment() {
         }
 
         coinInfoAdapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
-            override fun onCoinClick(coinPriceInfo: CoinPriceInfo) {
+            override fun onCoinClick(coinPriceInfo: CoinInfoDto) {
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(
                         R.id.container,
