@@ -6,16 +6,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoapplication.R
+import com.example.cryptoapplication.data.network.ApiFactory
 import com.example.cryptoapplication.databinding.ItemCoinInfoBinding
-import com.example.cryptoapplication.data.network.model.CoinInfoDto
+import com.example.cryptoapplication.domain.CoinInfo
+import com.example.cryptoapplication.utils.convertTimestampToTime
 import com.squareup.picasso.Picasso
 
 class CoinInfoAdapter(private val context: Context) :
     RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
 
-    var coinInfoList: List<CoinInfoDto> = listOf()
-        @SuppressLint("NotifyDataSetChanged")
-        set(value) {
+    var coinInfoList: List<CoinInfo> = listOf()
+        @SuppressLint("NotifyDataSetChanged") set(value) {
             field = value
             notifyDataSetChanged()
         }
@@ -40,8 +41,9 @@ class CoinInfoAdapter(private val context: Context) :
                         context.resources.getString(R.string.last_update_template)
                     tvSymbols.text = String.format(symbolsTemplate, fromSymbol, toSymbol)
                     tvPrice.text = price
-                    tvLastUpdate.text = String.format(lastUpdateTemplate, getFormattedTime())
-                    Picasso.get().load(getFullImageUrl()).into(ivLogoCoin)
+                    tvLastUpdate.text =
+                        String.format(lastUpdateTemplate, convertTimestampToTime(lastUpdate))
+                    Picasso.get().load(ApiFactory.BASE_IMAGE_URL + imageUrl).into(ivLogoCoin)
                     itemView.setOnClickListener {
                         onCoinClickListener?.onCoinClick(coin)
                     }
@@ -55,6 +57,6 @@ class CoinInfoAdapter(private val context: Context) :
         RecyclerView.ViewHolder(binding.root)
 
     interface OnCoinClickListener {
-        fun onCoinClick(coinPriceInfo: CoinInfoDto) {}
+        fun onCoinClick(coinPriceInfo: CoinInfo) {}
     }
 }

@@ -11,6 +11,7 @@ import com.example.cryptoapplication.R
 import com.example.cryptoapplication.presentaton.adapter.CoinInfoAdapter
 import com.example.cryptoapplication.databinding.FragmentCoinPriceListBinding
 import com.example.cryptoapplication.data.network.model.CoinInfoDto
+import com.example.cryptoapplication.domain.CoinInfo
 
 class CoinPriceListFragment : Fragment() {
     private lateinit var viewModel: ViewModel
@@ -18,9 +19,7 @@ class CoinPriceListFragment : Fragment() {
     private lateinit var binding: FragmentCoinPriceListBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentCoinPriceListBinding.inflate(inflater, container, false)
         return binding.root
@@ -32,19 +31,15 @@ class CoinPriceListFragment : Fragment() {
         val coinInfoAdapter = CoinInfoAdapter(requireContext())
         rvCoinPriceList.adapter = coinInfoAdapter
         viewModel = ViewModelProvider(this)[ViewModel::class.java]
-        viewModel.priceList.observe(viewLifecycleOwner) {
+        viewModel.coinInfoList.observe(viewLifecycleOwner) {
             coinInfoAdapter.coinInfoList = it
         }
 
         coinInfoAdapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
-            override fun onCoinClick(coinPriceInfo: CoinInfoDto) {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(
-                        R.id.container,
-                        CoinDetailFragment.newInstance(coinPriceInfo.fromSymbol)
-                    )
-                    .addToBackStack(null)
-                    .commit()
+            override fun onCoinClick(coinPriceInfo: CoinInfo) {
+                requireActivity().supportFragmentManager.beginTransaction().replace(
+                        R.id.container, CoinDetailFragment.newInstance(coinPriceInfo.fromSymbol)
+                    ).addToBackStack(null).commit()
             }
         }
     }

@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.cryptoapplication.data.network.ApiFactory
 import com.example.cryptoapplication.databinding.FragmentCoinDetailBinding
+import com.example.cryptoapplication.utils.convertTimestampToTime
 import com.squareup.picasso.Picasso
 
 class CoinDetailFragment : Fragment() {
@@ -18,9 +20,7 @@ class CoinDetailFragment : Fragment() {
         get() = _binding ?: throw RuntimeException("FragmentCoinDetailBinding==null")
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCoinDetailBinding.inflate(inflater, container, false)
         return binding.root
@@ -41,18 +41,20 @@ class CoinDetailFragment : Fragment() {
                     tvMinPrice.text = it.lowDay
                     tvMaxPrice.text = it.highDay
                     tvLastMarket.text = it.lastMarket
-                    tvLastUpdate.text = it.getFormattedTime()
+                    tvLastUpdate.text = convertTimestampToTime(it.lastUpdate)
                     tvFromSymbol.text = it.fromSymbol
                     tvToSymbol.text = it.toSymbol
-                    Picasso.get().load(it.getFullImageUrl()).into(ivLogoCoin)
+                    Picasso.get().load(ApiFactory.BASE_IMAGE_URL + it.imageUrl).into(ivLogoCoin)
                 }
             }
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
     companion object {
         private const val EXTRA_FROM_SYMBOL = "fSym"
 
