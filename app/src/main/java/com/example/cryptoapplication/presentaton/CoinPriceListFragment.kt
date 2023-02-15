@@ -28,18 +28,19 @@ class CoinPriceListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rvCoinPriceList = binding.rvCoinPriceList
+        binding.rvCoinPriceList.itemAnimator = null
         val coinInfoAdapter = CoinInfoAdapter(requireContext())
         rvCoinPriceList.adapter = coinInfoAdapter
         viewModel = ViewModelProvider(this)[ViewModel::class.java]
         viewModel.coinInfoList.observe(viewLifecycleOwner) {
-            coinInfoAdapter.coinInfoList = it
+            coinInfoAdapter.submitList(it)
         }
 
         coinInfoAdapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
             override fun onCoinClick(coinPriceInfo: CoinInfo) {
                 requireActivity().supportFragmentManager.beginTransaction().replace(
-                        R.id.container, CoinDetailFragment.newInstance(coinPriceInfo.fromSymbol)
-                    ).addToBackStack(null).commit()
+                    R.id.container, CoinDetailFragment.newInstance(coinPriceInfo.fromSymbol)
+                ).addToBackStack(null).commit()
             }
         }
     }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoapplication.R
 import com.example.cryptoapplication.databinding.ItemCoinInfoBinding
@@ -11,13 +12,7 @@ import com.example.cryptoapplication.domain.CoinInfo
 import com.squareup.picasso.Picasso
 
 class CoinInfoAdapter(private val context: Context) :
-    RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
-
-    var coinInfoList: List<CoinInfo> = listOf()
-        @SuppressLint("NotifyDataSetChanged") set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    ListAdapter<CoinInfo, CoinInfoAdapter.CoinInfoViewHolder>(CoinInfoDiffCallBack) {
 
     var onCoinClickListener: OnCoinClickListener? = null
 
@@ -27,10 +22,9 @@ class CoinInfoAdapter(private val context: Context) :
         return CoinInfoViewHolder(binding)
     }
 
-    override fun getItemCount() = coinInfoList.size
 
     override fun onBindViewHolder(holder: CoinInfoViewHolder, position: Int) {
-        val coin = coinInfoList[position]
+        val coin = getItem(position)
         with(holder) {
             with(coin) {
                 with(binding) {
@@ -39,8 +33,7 @@ class CoinInfoAdapter(private val context: Context) :
                         context.resources.getString(R.string.last_update_template)
                     tvSymbols.text = String.format(symbolsTemplate, fromSymbol, toSymbol)
                     tvPrice.text = price
-                    tvLastUpdate.text =
-                        String.format(lastUpdateTemplate, lastUpdate)
+                    tvLastUpdate.text = String.format(lastUpdateTemplate, lastUpdate)
                     Picasso.get().load(imageUrl).into(ivLogoCoin)
                     itemView.setOnClickListener {
                         onCoinClickListener?.onCoinClick(coin)
