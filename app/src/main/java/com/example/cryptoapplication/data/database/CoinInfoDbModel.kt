@@ -13,5 +13,5 @@ data class CoinInfoDbModel(
     val lastMarket: String?,
     val toSymbol: String?,
     val lastUpdate: Long?,
-    val imageUrl: String?
+    val imageUrl: String
 )

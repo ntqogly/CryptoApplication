@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.cryptoapplication.data.network.ApiFactory
 import com.example.cryptoapplication.databinding.FragmentCoinDetailBinding
-import com.example.cryptoapplication.utils.convertTimestampToTime
 import com.squareup.picasso.Picasso
 
 class CoinDetailFragment : Fragment() {
@@ -41,10 +39,10 @@ class CoinDetailFragment : Fragment() {
                     tvMinPrice.text = it.lowDay
                     tvMaxPrice.text = it.highDay
                     tvLastMarket.text = it.lastMarket
-                    tvLastUpdate.text = convertTimestampToTime(it.lastUpdate)
+                    tvLastUpdate.text = it.lastUpdate
                     tvFromSymbol.text = it.fromSymbol
                     tvToSymbol.text = it.toSymbol
-                    Picasso.get().load(ApiFactory.BASE_IMAGE_URL + it.imageUrl).into(ivLogoCoin)
+                    Picasso.get().load(it.imageUrl).into(ivLogoCoin)
                 }
             }
         }
