@@ -56,8 +56,13 @@ dependencies {
     implementation("androidx.room:room-ktx:2.5.0")
 
     implementation 'com.squareup.picasso:picasso:2.71828'
-
     implementation 'androidx.work:work-runtime-ktx:2.8.0'
+
+    implementation 'com.google.dagger:dagger-android:2.35.1'
+    kapt 'com.google.dagger:dagger-compiler:2.37'
+    kapt("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.5.0")
+
+
 
 
 
