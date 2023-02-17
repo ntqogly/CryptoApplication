@@ -11,6 +11,9 @@ import com.squareup.picasso.Picasso
 
 class CoinDetailFragment : Fragment() {
 
+
+
+
     private lateinit var viewModel: ViewModel
 
     private var _binding: FragmentCoinDetailBinding? = null
