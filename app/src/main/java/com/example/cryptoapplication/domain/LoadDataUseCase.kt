@@ -1,6 +1,10 @@
 package com.example.cryptoapplication.domain
 
-class LoadDataUseCase(private val repository: CoinRepository) {
+import javax.inject.Inject
+
+class LoadDataUseCase @Inject constructor(
+    private val repository: CoinRepository
+) {
 
     operator fun invoke() = repository.loadData()
 }

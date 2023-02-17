@@ -1,6 +1,5 @@
-package com.example.cryptoapplication.presentaton.adapter
+package com.example.cryptoapplication.presentation.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup

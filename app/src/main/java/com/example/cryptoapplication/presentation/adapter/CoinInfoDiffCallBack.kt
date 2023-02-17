@@ -1,4 +1,4 @@
-package com.example.cryptoapplication.presentaton.adapter
+package com.example.cryptoapplication.presentation.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.cryptoapplication.domain.CoinInfo
